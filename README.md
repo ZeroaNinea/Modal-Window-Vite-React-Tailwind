@@ -2,6 +2,8 @@
 
 This is an animated example of a modal window using Vite + React + Tailwind.
 
+![Modal Window](./public/modal.gif)
+
 ## Create a New React Project with Vite
 
 Install the latest version of Vite and create a new React project:
@@ -268,3 +270,7 @@ This keeps movement independent from animation logic.
 
 - [`components/modal/index.tsx`](./src/components/modal/index.tsx)
 - [`components/modal/style.css`](./src/components/modal/style.css)
+
+## References
+
+- **Medium:** https://medium.com/@heghine.dev357/modal-window-vite-react-tailwind-6378848a2fee
