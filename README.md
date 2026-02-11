@@ -20,7 +20,7 @@ npm install -D @tailwindcss/vite
 
 Add Tailwind to your [`vite.config.ts`](./vite.config.ts):
 
-```js
+```ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -143,7 +143,7 @@ will-change: background-position;
 
 This hints to the browser that the background position will animate, allowing it to optimize rendering.
 
-### 5. Why the Animation Must Move Exactly 200%
+### 5. Why the Animation Must Move Exactly 200%?
 
 If the animation distance does not match exactly one full gradient cycle, the loop will visibly "jump".
 
@@ -159,8 +159,8 @@ Because the final frame matches the first frame visually, the loop becomes perfe
 
 ### Source Code
 
-- [Rainbow Button TSX](./src/components/rainbow-button/index.tsx)
-- [Ripple Button CSS](./src/components/ripple-button/style.css)
+- [`components/rainbow-button/index.tsx`](./src/components/rainbow-button/index.tsx)
+- [`components/rainbow-button/style.css`](./src/components/rainbow-button/style.css)
 
 ## How the Modal Window Works
 
