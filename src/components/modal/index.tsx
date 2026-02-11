@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import { X, Move } from 'feather-icons-react';
 
 import RippleButton from '../ripple-button';
-
 import './style.css';
 
 interface Props {
@@ -15,9 +13,6 @@ interface Props {
 }
 
 export default function Modal({ open, onClose, children }: Props) {
-  // const [isVisible, setIsVisible] = useState(open);
-  // const [isClosing, setIsClosing] = useState(false);
-
   const [isMounted, setIsMounted] = useState(open);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -32,19 +27,6 @@ export default function Modal({ open, onClose, children }: Props) {
       y: e.clientY - position.y,
     });
   };
-
-  // const handleMouseMove = (e: MouseEvent) => {
-  //   if (!dragging) return;
-
-  //   setPosition({
-  //     x: e.clientX - offset.x,
-  //     y: e.clientY - offset.y,
-  //   });
-  // };
-
-  // const handleMouseUp = () => {
-  //   setDragging(false);
-  // };
 
   useEffect(() => {
     if (!dragging) return;
@@ -69,27 +51,15 @@ export default function Modal({ open, onClose, children }: Props) {
     };
   }, [dragging, offset]);
 
-  // useEffect(() => {
-  //   if (open) {
-  //     setIsVisible(true);
-  //     setIsClosing(false);
-  //   } else if (isVisible) {
-  //     setIsClosing(true);
-  //     const timeout = setTimeout(() => {
-  //       setIsVisible(false);
-  //       setIsClosing(false);
-  //     }, 300);
-  //     return () => clearTimeout(timeout);
-  //   }
-  // }, [open, isVisible]);
+  if (open && !isMounted) {
+    setIsMounted(true);
+  }
 
   useEffect(() => {
-    if (open) {
-      setIsMounted(true);
-    } else if (isMounted) {
-      setIsClosing(true);
+    if (!open && isMounted) {
+      setTimeout(() => setIsClosing(true));
+
       const timeout = setTimeout(() => {
-        setIsMounted(false);
         setIsClosing(false);
       }, 300);
 
@@ -97,9 +67,9 @@ export default function Modal({ open, onClose, children }: Props) {
     }
   }, [open, isMounted]);
 
-  // if (!isVisible) return null;
+  const shouldRender = open || isClosing;
 
-  if (!isMounted) return null;
+  if (!shouldRender) return null;
 
   return (
     <div
