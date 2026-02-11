@@ -68,7 +68,6 @@ export default function Modal({ open, onClose, children }: Props) {
   }, [open, isMounted]);
 
   const shouldRender = open || isClosing;
-
   if (!shouldRender) return null;
 
   return (

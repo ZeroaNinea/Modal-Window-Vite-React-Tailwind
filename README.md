@@ -194,8 +194,8 @@ When `open` becomes `false`, we:
 
 ```tsx
 useEffect(() => {
-  if (!open) {
-    setIsClosing(true);
+  if (!open && isMounted) {
+    setTimeout(() => setIsClosing(true));
 
     const timeout = setTimeout(() => {
       setIsClosing(false);
@@ -203,7 +203,7 @@ useEffect(() => {
 
     return () => clearTimeout(timeout);
   }
-}, [open]);
+}, [open, isMounted]);
 ```
 
 ### 3. Conditional Rendering Logic
