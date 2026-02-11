@@ -22,7 +22,7 @@ export default function RainbowButton({ onClick, children }: Props) {
         border-transparent
         rounded-lg
         overflow-hidden
-        hover:scale-105 active:scale-95
+        hover:scale-110 active:scale-90
         transition-all
         duration-300
 
