@@ -1,24 +1,14 @@
-.rainbow-btn {
-  position: relative;
-  padding: 12px 24px;
-  font-size: 18px;
-  font-weight: 600;
-  background: transparent;
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
 /* Rainbow border */
 .rainbow-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  padding: 2px;
   background: linear-gradient(
     90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet,
     red,
     orange,
     yellow,
@@ -28,7 +18,7 @@
     violet
   );
   background-size: 300% 300%;
-  animation: rainbowMove 4s linear infinite;
+  animation: rainbowMove 8s linear infinite;
 
   /* Border mask trick */
   mask:
@@ -43,8 +33,15 @@
 
 /* Rainbow text */
 .rainbow-btn {
-  background-image: linear-gradient(
+  background: linear-gradient(
     90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet,
     red,
     orange,
     yellow,
@@ -54,17 +51,17 @@
     violet
   );
   background-size: 300% 300%;
-  animation: rainbowMove 4s linear infinite;
+  animation: rainbowMove 8s linear infinite;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 @keyframes rainbowMove {
-  0% {
+  from {
     background-position: 0% 50%;
   }
-  100% {
-    background-position: 100% 50%;
+  to {
+    background-position: 200% 50%;
   }
 }

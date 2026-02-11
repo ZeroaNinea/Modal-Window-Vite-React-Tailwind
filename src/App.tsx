@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div style={{ padding: '40px' }}>
-      <RainbowButton onClick={() => setOpen(true)}>
+      <RainbowButton onClick={() => setTimeout(() => setOpen(true), 300)}>
         Open Rainbow Modal
       </RainbowButton>
 
