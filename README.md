@@ -145,7 +145,7 @@ This hints to the browser that the background position will animate, allowing it
 
 ### 5. Why the Animation Must Move Exactly 200%
 
-If the animation distance does not match exactly one full gradient cycle, the loop will visibly “jump”.
+If the animation distance does not match exactly one full gradient cycle, the loop will visibly "jump".
 
 Originally, the jump appeared near the center of the button (around the cyan color).
 This happened because the gradient was not shifted by a complete cycle before restarting.
