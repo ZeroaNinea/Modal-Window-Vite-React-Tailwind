@@ -176,7 +176,7 @@ The modal is controlled by an external `open` prop:
 
 The parent component decides when the modal should open or close.
 
-## 2. Handling Mounting and Exit Animations
+### 2. Handling Mounting and Exit Animations
 
 If we immediately return `null` when `open` becomes `false`, the modal disappears instantly and the closing animation never plays.
 
@@ -266,5 +266,5 @@ This keeps movement independent from animation logic.
 
 ### Source Code
 
-- [Modal TSX](./src/components/modal/index.tsx)
-- [Modal CSS](./src/components/modal/style.css)
+- [`components/modal/index.tsx`](./src/components/modal/index.tsx)
+- [`components/modal/style.css`](./src/components/modal/style.css)
