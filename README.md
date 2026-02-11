@@ -176,60 +176,77 @@ The modal is controlled by an external `open` prop:
 
 The parent component decides when the modal should open or close.
 
-### 2. Preventing Instant Unmount on Close
+## 2. Handling Mounting and Exit Animations
 
-If we simply returned `null` when `open` is `false`, the modal would disappear immediately and the closing animation would never play.
+If we immediately return `null` when `open` becomes `false`, the modal disappears instantly and the closing animation never plays.
 
-To solve this, we introduce a local animation state:
+To allow a smooth exit transition, the component maintains two internal states:
 
 ```tsx
+const [isVisible, setIsVisible] = useState(open);
 const [isClosing, setIsClosing] = useState(false);
 ```
 
-When `open` becomes `false`, we:
+#### `isVisible`
 
-1. Set `isClosing = true`.
-2. Wait for the animation duration (300ms).
-3. Then reset `isClosing`.
-4. `isVisible` gets the current state of `open`. If `isVisible` is `false`, the `fade-out-right` animation will play.
+Controls whether the modal is mounted in the DOM.
+
+#### `isClosing`
+
+Controls whether the closing animation class should be applied.
+
+#### Opening Flow
+
+When `open` becomes `true`:
+
+1. The modal is mounted (`isVisible = true`).
+2. Any previous closing state is cleared.
 
 ```tsx
-useEffect(() => {
-  if (open) {
-    setTimeout(() => setIsVisible(true));
-    setTimeout(() => setIsClosing(false));
-  } else if (isVisible) {
-    setTimeout(() => setIsClosing(true));
-    const timeout = setTimeout(() => {
-      setIsVisible(false);
-      setIsClosing(false);
-    }, 300);
-    return () => clearTimeout(timeout);
-  }
-}, [isVisible, open]);
+if (open) {
+  setTimeout(() => setIsVisible(true));
+  setTimeout(() => setIsClosing(false));
+}
 ```
 
-Return `null` if the modal window should be hidden.
+The small asynchronous delay ensures the state update happens after the current render cycle, preventing cascading renders inside the effect.
+
+#### Closing Flow
+
+When `open` becomes `false` and the modal is currently visible:
+
+1. `isClosing` is set to `true`, triggering the CSS exit animation.
+2. After 300ms (animation duration), the modal is unmounted.
+3. Closing state is reset.
+
+```tsx
+else if (isVisible) {
+  setTimeout(() => setIsClosing(true));
+
+  const timeout = setTimeout(() => {
+    setIsVisible(false);
+    setIsClosing(false);
+  }, 300);
+
+  return () => clearTimeout(timeout);
+}
+```
+
+### 3. Conditional Rendering
+
+The modal is removed from the DOM only when it is no longer visible:
 
 ```tsx
 if (!isVisible) return null;
 ```
 
-### 3. Conditional Rendering Logic
+This approach separates:
 
-Instead of storing a separate `isMounted` state, rendering is derived directly from:
+- External control (`open`).
+- DOM lifecycle (`isVisible`).
+- Animation state (`isClosing`).
 
-```tsx
-const shouldRender = open || isClosing;
-```
-
-This means:
-
-- When opening -> render immediately.
-- When closing -> remain mounted during animation.
-- After animation -> unmount automatically.
-
-This avoids syncing props to state and follows modern React best practices.
+Which makes the behavior predictable and prevents abrupt unmounting during transitions.
 
 ### 4. Dragging the Modal
 
