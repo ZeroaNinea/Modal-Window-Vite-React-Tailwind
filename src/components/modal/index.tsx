@@ -22,7 +22,7 @@ export default function Modal({ open, onClose, children }: Props) {
       onClick={onClose}
     >
       <div
-        className="bg-gray-900 p-8 rounded-xl text-gray-300 min-w-75"
+        className="bg-gray-900 p-8 rounded-xl text-gray-300 min-w-75 fade-in-left"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

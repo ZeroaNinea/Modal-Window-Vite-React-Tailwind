@@ -1,6 +1,6 @@
 import RippleButton from '../ripple-button';
 
-import './styles.css';
+import './style.css';
 
 interface Props {
   onClick: () => void;
