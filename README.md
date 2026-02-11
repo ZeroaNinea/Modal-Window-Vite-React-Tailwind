@@ -143,6 +143,20 @@ will-change: background-position;
 
 This hints to the browser that the background position will animate, allowing it to optimize rendering.
 
+### 5️⃣ Why the Animation Must Move Exactly 200%
+
+If the animation distance does not match exactly one full gradient cycle, the loop will visibly “jump”.
+
+Originally, the jump appeared near the center of the button (around the cyan color).
+This happened because the gradient was not shifted by a complete cycle before restarting.
+
+To make the animation seamless:
+
+- The gradient is duplicated by setting `background-size: 200% 100%`.
+- The animation shifts the background from `0%` to `200%`.
+
+Because the final frame matches the first frame visually, the loop becomes perfectly smooth.
+
 ### Final Result
 
 - The text shows a smooth animated rainbow.
