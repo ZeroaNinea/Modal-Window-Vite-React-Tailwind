@@ -121,7 +121,7 @@ export default function Modal({ open, onClose, children }: Props) {
               className="
               cursor-pointer
               w-8 h-8 p-1
-              hover:bg-gray-600
+              hover:bg-gray-600 hover:text-gray-400
               rounded-full flex
               items-center justify-center
               hover:scale-105 active:scale-90
