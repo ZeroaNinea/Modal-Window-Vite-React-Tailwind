@@ -15,7 +15,10 @@ interface Props {
 }
 
 export default function Modal({ open, onClose, children }: Props) {
-  const [isVisible, setIsVisible] = useState(open);
+  // const [isVisible, setIsVisible] = useState(open);
+  // const [isClosing, setIsClosing] = useState(false);
+
+  const [isMounted, setIsMounted] = useState(open);
   const [isClosing, setIsClosing] = useState(false);
 
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -66,21 +69,37 @@ export default function Modal({ open, onClose, children }: Props) {
     };
   }, [dragging, offset]);
 
+  // useEffect(() => {
+  //   if (open) {
+  //     setIsVisible(true);
+  //     setIsClosing(false);
+  //   } else if (isVisible) {
+  //     setIsClosing(true);
+  //     const timeout = setTimeout(() => {
+  //       setIsVisible(false);
+  //       setIsClosing(false);
+  //     }, 300);
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [open, isVisible]);
+
   useEffect(() => {
     if (open) {
-      setIsVisible(true);
-      setIsClosing(false);
-    } else if (isVisible) {
+      setIsMounted(true);
+    } else if (isMounted) {
       setIsClosing(true);
       const timeout = setTimeout(() => {
-        setIsVisible(false);
+        setIsMounted(false);
         setIsClosing(false);
       }, 300);
+
       return () => clearTimeout(timeout);
     }
-  }, [open, isVisible]);
+  }, [open, isMounted]);
 
-  if (!isVisible) return null;
+  // if (!isVisible) return null;
+
+  if (!isMounted) return null;
 
   return (
     <div
@@ -104,7 +123,7 @@ export default function Modal({ open, onClose, children }: Props) {
             transform: `translate(${position.x}px, ${position.y}px)`,
           }}
           className={`
-          relative bg-gray-900 p-8 rounded-xl text-gray-300 min-w-75 fade-in-left
+          relative bg-gray-900 p-8 rounded-xl text-gray-300 min-w-75
         `}
           onClick={(e) => e.stopPropagation()}
         >
