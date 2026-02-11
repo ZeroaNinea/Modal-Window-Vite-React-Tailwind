@@ -14,7 +14,7 @@ function App() {
         Open Rainbow Modal
       </RainbowButton>
 
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal open={open} onClose={() => setTimeout(() => setOpen(false), 300)}>
         <h2>Hello 🌈</h2>
         <p>This is your animated modal.</p>
       </Modal>
