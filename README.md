@@ -31,7 +31,7 @@ export default defineConfig({
 });
 ```
 
-Import Tailwind into the [`index.css](./src/index.css):
+Import Tailwind into the [`index.css`](./src/index.css):
 
 ```css
 @import 'tailwindcss';
