@@ -157,6 +157,11 @@ To make the animation seamless:
 
 Because the final frame matches the first frame visually, the loop becomes perfectly smooth.
 
+### Source Code
+
+- [Rainbow Button TSX](./src/components/rainbow-button/index.tsx)
+- [Ripple Button CSS](./src/components/ripple-button/style.css)
+
 ## How the Modal Window Works
 
 This modal implements smooth open and close animations while avoiding common React anti-patterns.
@@ -232,3 +237,8 @@ style={{
 ```
 
 This keeps movement independent from animation logic.
+
+### Source Code
+
+- [Modal TSX](./src/components/modal/index.tsx)
+- [Modal CSS](./src/components/modal/style.css)
