@@ -2,23 +2,18 @@
 .rainbow-btn::before {
   background: linear-gradient(
     90deg,
-    red,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet,
-    red,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
+    red 0%,
+    orange 14%,
+    yellow 28%,
+    green 42%,
+    cyan 56%,
+    blue 70%,
+    violet 84%,
+    red 100%
   );
-  background-size: 300% 300%;
-  animation: rainbowMove 8s linear infinite;
+  background-size: 200% 100%;
+  animation: rainbowMove 4s linear infinite;
+  will-change: background-position;
 
   /* Border mask trick */
   mask:
@@ -35,33 +30,29 @@
 .rainbow-btn {
   background: linear-gradient(
     90deg,
-    red,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet,
-    red,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
+    red 0%,
+    orange 14%,
+    yellow 28%,
+    green 42%,
+    cyan 56%,
+    blue 70%,
+    violet 84%,
+    red 100%
   );
-  background-size: 300% 300%;
-  animation: rainbowMove 8s linear infinite;
+
+  background-size: 200% 100%;
+  animation: rainbowMove 4s linear infinite;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  will-change: background-position;
 }
 
 @keyframes rainbowMove {
   from {
-    background-position: 0% 50%;
+    background-position: 0% 0%;
   }
   to {
-    background-position: 200% 50%;
+    background-position: 200% 0%;
   }
 }
