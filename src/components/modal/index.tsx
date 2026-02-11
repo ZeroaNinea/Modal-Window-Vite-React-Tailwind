@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function Modal({ open, onClose, children }: Props) {
-  const [isMounted, setIsMounted] = useState(open);
+  const [isVisible, setIsVisible] = useState(open);
   const [isClosing, setIsClosing] = useState(false);
 
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -51,24 +51,21 @@ export default function Modal({ open, onClose, children }: Props) {
     };
   }, [dragging, offset]);
 
-  if (open && !isMounted) {
-    setIsMounted(true);
-  }
-
   useEffect(() => {
-    if (!open && isMounted) {
+    if (open) {
+      setTimeout(() => setIsVisible(true));
+      setTimeout(() => setIsClosing(false));
+    } else if (isVisible) {
       setTimeout(() => setIsClosing(true));
-
       const timeout = setTimeout(() => {
+        setIsVisible(false);
         setIsClosing(false);
       }, 300);
-
       return () => clearTimeout(timeout);
     }
-  }, [open, isMounted]);
+  }, [isVisible, open]);
 
-  const shouldRender = open || isClosing;
-  if (!shouldRender) return null;
+  if (!isVisible) return null;
 
   return (
     <div

@@ -191,19 +191,28 @@ When `open` becomes `false`, we:
 1. Set `isClosing = true`.
 2. Wait for the animation duration (300ms).
 3. Then reset `isClosing`.
+4. `isVisible` gets the current state of `open`. If `isVisible` is `false`, the `fade-out-right` animation will play. It's needed to prevent the modal from appearing when the window reloads.
 
 ```tsx
 useEffect(() => {
-  if (!open && isMounted) {
+  if (open) {
+    setTimeout(() => setIsVisible(true));
+    setTimeout(() => setIsClosing(false));
+  } else if (isVisible) {
     setTimeout(() => setIsClosing(true));
-
     const timeout = setTimeout(() => {
+      setIsVisible(false);
       setIsClosing(false);
     }, 300);
-
     return () => clearTimeout(timeout);
   }
-}, [open, isMounted]);
+}, [isVisible, open]);
+```
+
+Return `null` if the modal window should be hidden.
+
+```tsx
+if (!isVisible) return null;
 ```
 
 ### 3. Conditional Rendering Logic
