@@ -274,3 +274,4 @@ This keeps movement independent from animation logic.
 ## References
 
 - **Medium:** https://medium.com/@heghine.dev357/modal-window-vite-react-tailwind-6378848a2fee
+- **LinkedIn:** https://www.linkedin.com/feed/update/urn:li:activity:7427482238151180288/?originTrackingId=wgM9Yq4hPYGbCUHyKc35FQ%3D%3D
