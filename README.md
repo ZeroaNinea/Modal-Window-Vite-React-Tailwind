@@ -2,7 +2,7 @@
 
 This is an animated example of a modal window using Vite + React + Tailwind.
 
-## Create a New React project with Vite
+## Create a New React Project with Vite
 
 Install the latest version of Vite and create a new React project:
 
@@ -18,7 +18,7 @@ Install Tailwind:
 npm install -D @tailwindcss/vite
 ```
 
-Add Tailwind to your [`vite.config.js`](./vite.config.js):
+Add Tailwind to your [`vite.config.ts`](./vite.config.ts):
 
 ```js
 import { defineConfig } from 'vite';
