@@ -1,3 +1,5 @@
+import RippleButton from '../ripple-button';
+
 import './styles.css';
 
 interface Props {
@@ -5,18 +7,10 @@ interface Props {
   children: React.ReactNode;
 }
 
-/* Rainbow border */
-// .rainbow-btn::before {
-//   content: '';
-// position: absolute;
-// inset: 0;
-// border-radius: 8px;
-// padding: 2px;
-// }
-
 export default function RainbowButton({ onClick, children }: Props) {
   return (
-    <button
+    <RippleButton
+      mode="dark"
       className="rainbow-btn
         relative
         p-[12px_24px]
@@ -43,6 +37,6 @@ export default function RainbowButton({ onClick, children }: Props) {
       onClick={onClick}
     >
       {children}
-    </button>
+    </RippleButton>
   );
 }
