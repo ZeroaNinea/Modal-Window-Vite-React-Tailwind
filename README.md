@@ -45,7 +45,7 @@ The rainbow button effect is created using three main techniques:
 2. Text clipping with `background-clip: text`.
 3. A masked pseudo-element for the animated border.
 
-### 1️⃣ Animated Gradient
+### 1. Animated Gradient
 
 Both the button text and its border use the same horizontal linear gradient:
 
@@ -90,7 +90,7 @@ Then we animate the horizontal position:
 Because the gradient is duplicated across 200% width, moving from `0%` to `200%` shifts exactly one full cycle.
 When the animation restarts, the visual state is identical — so there is no visible jump.
 
-### 2️⃣ Rainbow Text
+### 2. Rainbow Text
 
 The text uses:
 
@@ -108,7 +108,7 @@ This works by:
 
 The result: only the text is filled with the moving rainbow.
 
-### 3️⃣ Rainbow Border (Mask Trick)
+### 3. Rainbow Border (Mask Trick)
 
 The border is created using a `::before` pseudo-element.
 
@@ -135,7 +135,7 @@ So visually:
 - The mask removes the center.
 - Only the border remains.
 
-### 4️⃣ Performance Optimization
+### 4. Performance Optimization
 
 ```css
 will-change: background-position;
@@ -143,7 +143,7 @@ will-change: background-position;
 
 This hints to the browser that the background position will animate, allowing it to optimize rendering.
 
-### 5️⃣ Why the Animation Must Move Exactly 200%
+### 5. Why the Animation Must Move Exactly 200%
 
 If the animation distance does not match exactly one full gradient cycle, the loop will visibly “jump”.
 
@@ -157,9 +157,78 @@ To make the animation seamless:
 
 Because the final frame matches the first frame visually, the loop becomes perfectly smooth.
 
-### Final Result
+## How the Modal Window Works
 
-- The text shows a smooth animated rainbow.
-- The border shows the same synchronized rainbow.
-- The animation loops seamlessly.
-- No JavaScript is required for the effect.
+This modal implements smooth open and close animations while avoiding common React anti-patterns.
+
+### 1. Controlled Visibility
+
+The modal is controlled by an external `open` prop:
+
+```tsx
+<Modal open={isOpen} onClose={...} />
+```
+
+The parent component decides when the modal should open or close.
+
+### 2. Preventing Instant Unmount on Close
+
+If we simply returned `null` when `open` is `false`, the modal would disappear immediately and the closing animation would never play.
+
+To solve this, we introduce a local animation state:
+
+```tsx
+const [isClosing, setIsClosing] = useState(false);
+```
+
+When `open` becomes `false`, we:
+
+1. Set `isClosing = true`.
+2. Wait for the animation duration (300ms).
+3. Then reset `isClosing`.
+
+```tsx
+useEffect(() => {
+  if (!open) {
+    setIsClosing(true);
+
+    const timeout = setTimeout(() => {
+      setIsClosing(false);
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }
+}, [open]);
+```
+
+### 3. Conditional Rendering Logic
+
+Instead of storing a separate `isMounted` state, rendering is derived directly from:
+
+```tsx
+const shouldRender = open || isClosing;
+```
+
+This means:
+
+- When opening -> render immediately.
+- When closing -> remain mounted during animation.
+- After animation -> unmount automatically.
+
+This avoids syncing props to state and follows modern React best practices.
+
+### 4. Dragging the Modal
+
+Dragging is implemented by:
+
+- Tracking `position`.
+- Listening to `mousemove` and `mouseup` events.
+- Updating transform dynamically.
+
+```tsx
+style={{
+  transform: `translate(${position.x}px, ${position.y}px)`
+}}
+```
+
+This keeps movement independent from animation logic.
