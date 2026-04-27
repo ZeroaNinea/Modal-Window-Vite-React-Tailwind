@@ -299,6 +299,8 @@ Add new scripts in `package.json`:
   },
 ```
 
+After deployment remove the `base` field from `vite.config.ts`.
+
 ## References
 
 - **Medium:** [https://medium.com/@heghine.dev357/modal-window-vite-react-tailwind-6378848a2fee](https://medium.com/@heghine.dev357/modal-window-vite-react-tailwind-6378848a2fee)
