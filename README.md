@@ -159,7 +159,7 @@ To make the animation seamless:
 
 Because the final frame matches the first frame visually, the loop becomes perfectly smooth.
 
-### Source Code
+### Source Code: Rainbow Button
 
 - [`components/rainbow-button/index.tsx`](./src/components/rainbow-button/index.tsx)
 - [`components/rainbow-button/style.css`](./src/components/rainbow-button/style.css)
@@ -266,12 +266,40 @@ style={{
 
 This keeps movement independent from animation logic.
 
-### Source Code
+### Source Code: Modal
 
 - [`components/modal/index.tsx`](./src/components/modal/index.tsx)
 - [`components/modal/style.css`](./src/components/modal/style.css)
 
+## Deployment on GitHub Pages
+
+Install `gh-pages`:
+
+```bash
+npm install gh-pages --save-dev
+```
+
+Edit `vite.config.ts`:
+
+```ts
+export default defineConfig({
+  base: '/Modal-Window-Vite-React-Tailwind/',
+});
+```
+
+Add new scripts in `package.json`:
+
+```json
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "deploy": "gh-pages -d dist",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+```
+
 ## References
 
-- **Medium:** https://medium.com/@heghine.dev357/modal-window-vite-react-tailwind-6378848a2fee
-- **LinkedIn:** https://www.linkedin.com/feed/update/urn:li:activity:7427482238151180288/?originTrackingId=wgM9Yq4hPYGbCUHyKc35FQ%3D%3D
+- **Medium:** [https://medium.com/@heghine.dev357/modal-window-vite-react-tailwind-6378848a2fee](https://medium.com/@heghine.dev357/modal-window-vite-react-tailwind-6378848a2fee)
+- **LinkedIn:** [https://www.linkedin.com/feed/update/urn:li:activity:7427482238151180288/?originTrackingId=wgM9Yq4hPYGbCUHyKc35FQ%3D%3D](https://www.linkedin.com/feed/update/urn:li:activity:7427482238151180288/?originTrackingId=wgM9Yq4hPYGbCUHyKc35FQ%3D%3D)
